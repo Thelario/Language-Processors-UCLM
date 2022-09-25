@@ -104,7 +104,7 @@ class Tree:
 
 # Checking the class works well
 
-checkTreeClass = True
+checkTreeClass = False
 if checkTreeClass:
     A = Tree("diminuto")
     A.Add("pequeno")
@@ -112,5 +112,79 @@ if checkTreeClass:
     A.Add("grande")
     A.Add("diminuto")
     print(A)
-    #print (A.Exists(["ínfimo"]))
+    print (A.Exists(["ínfimo"]))
     print (A.Exists("grande"))
+
+# -------------------------------------------------------------------------
+
+class EXP:
+    def __init__(self): 
+        pass
+
+    # muestra la expresión utilizando paréntesis
+    def mostrar(self): 
+        pass 
+
+    # muestra el número de operaciones de la expresión
+    def numero_operaciones(self): 
+        pass 
+
+    # evalua la expresión
+    def interpreta(self): 
+        pass 
+
+class Numero(EXP):
+    # p.e. para crear una hoja con el d´ıgito 7 har´ıamos Numero(7)
+    def __init__(self, valor):
+        self.valor= valor
+
+    def mostrar(self):
+        return str(self.valor)
+
+    def numero_operaciones(self):
+        return 0
+
+    def interpreta(self):
+        return self.valor
+
+class Operacion(EXP):
+# p.e. para crear un nodo con la expresi´on 5*3 har´ıamos
+# Operacion(’*’,Numero(5),Numero(3))
+    def __init__(self, op, izda, dcha):
+        self.op= op
+        self.izda= izda
+        self.dcha= dcha
+
+    def mostrar(self):
+        return "(" + self.izda.mostrar() + self.op + self.dcha.mostrar() + ")"
+
+    def numero_operaciones(self):
+        return 1 + self.izda.numero_operaciones() + self.dcha.numero_operaciones()
+
+    def interpreta(self):
+        if self.op== "+":
+            return self.izda.interpreta() + self.dcha.interpreta()
+        elif self.op=="*": 
+            return self.izda.interpreta() * self.dcha.interpreta()
+        elif self.op=="-":
+            return self.izda.interpreta() - self.dcha.interpreta()
+        elif self.op=="/":
+            return self.izda.interpreta() / self.dcha.interpreta()
+
+# -------------------------------------------------------------------------
+
+checkEXP = False
+if checkEXP:
+    # Introducimos el ´arbol de la expresi´on 4*5+3*2
+    num1=Numero(4)
+    num2=Numero(5)
+    num3=Numero(3)
+    num4=Numero(2)
+    arbol1=Operacion("*",num1,num2) # 4*5
+    arbol2=Operacion("*",num3,num4) # 4*5
+    arbol_final=Operacion("+",arbol1,arbol2) # arbol1+arbol2
+
+    # Accedemos al ´arbol de tres formas diferentes mediante funciones miembro
+    print ("El arbol contiene la expresion:", arbol_final.mostrar())
+    print ("El arbol contiene en total %d operaciones" % arbol_final.numero_operaciones())
+    print ("La expresion se evalua como:", arbol_final.interpreta())
