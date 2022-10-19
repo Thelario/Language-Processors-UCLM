@@ -30,29 +30,40 @@ class Componente:
 #Algunas tendran camps adicionales para almacenar informacion importante (valor de un numero, etc)
 
 #clases para los simbolos de puntuacion y operadores
-
 class OpAsigna (Componente):
-  pass
+  def __init__(self, nl):
+    Componente.__init__(self)
+    self.operador = ":="
+    self.linea = nl
 
 # Clase que define la categoria OpAdd
 class OpAdd(Componente):
-  pass
-#debe almacenarse de que operador se trata
+  def __init__(self, nl):
+    Componente.__init__(self)
+    self.operador = "+"
+    self.linea = nl
+
 
 # Clase que define la categoria OpMult
 class OpMult(Componente):
-  pass
-#Debe alnmacenarse que operador es
+  def __init__(self, nl):
+    Componente.__init__(self)
+    self.operador = "*"
+    self.linea = nl
 
 #clases para representar los numeros.
 #Puede dividirse en 2 para representar los enteros y los reales de forma independiente
 #Si se opta por una sola categoria debe alamcenarse el tipo de los datos ademas del valor
 class Numero (Componente):
-  pass
+  def __init__(self, v, nl, t):
+    Componente.__init__(self)
+    self.tipo = t
+    self.valor = v
+    self.linea = nl
   
 #clases para representar los identificadores y palabras reservadas
 class Identif (Componente):
-  def __init__(self,v,nl):
+  def __init__(self, v, nl):
     Componente.__init__(self)
     self.valor= v
     self.linea=nl
@@ -61,11 +72,14 @@ class Identif (Componente):
 # Sera una clase independiente de los identificadores para facilitar el analisis sintactico
 class PR(Componente):
   def __init__(self, v,nl):
-    pass
-   # Completar
+    Componente.__init__(self)
+    self.valor= v
+    self.linea=nl
 
 # Clase que define la categoria OpRel
 # Debe alnmacenarse que operador es concretamente
 class OpRel(Componente):
-  pass
-
+  def __init__(self,v,nl, op):
+    Componente.__init__(self)
+    self.linea = nl
+    self.operador = op
