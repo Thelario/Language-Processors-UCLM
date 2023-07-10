@@ -25,11 +25,11 @@ class Componente:
     else:
       return self.cat
 
-#definicion de las clases que representan cada uno de los componentes lexicos
+# Definicion de las clases que representan cada uno de los componentes lexicos
 
-#Algunas tendran camps adicionales para almacenar informacion importante (valor de un numero, etc)
+# Algunas tendran camps adicionales para almacenar informacion importante (valor de un numero, etc)
 
-#clases para los simbolos de puntuacion y operadores
+# Clases para los simbolos de puntuacion y operadores
 class OpAsigna (Componente):
   def __init__(self, nl):
     Componente.__init__(self)
@@ -43,12 +43,32 @@ class OpAdd(Componente):
     self.operador = "+"
     self.linea = nl
 
+# Clase que define la categoria OpMult
+class OpResta(Componente):
+  def __init__(self, nl):
+    Componente.__init__(self)
+    self.operador = "-"
+    self.linea = nl
 
 # Clase que define la categoria OpMult
 class OpMult(Componente):
   def __init__(self, nl):
     Componente.__init__(self)
     self.operador = "*"
+    self.linea = nl
+
+# Clase que define la categoria OpMult
+class OpDiv(Componente):
+  def __init__(self, nl):
+    Componente.__init__(self)
+    self.operador = "/"
+    self.linea = nl
+
+# Clase que define la categoria OpMult
+class OpResto(Componente):
+  def __init__(self, nl):
+    Componente.__init__(self)
+    self.operador = "%"
     self.linea = nl
 
 #clases para representar los numeros.
@@ -71,7 +91,7 @@ class Identif (Componente):
 # Clase que reprresenta las palabras reservadas.
 # Sera una clase independiente de los identificadores para facilitar el analisis sintactico
 class PR(Componente):
-  def __init__(self, v,nl):
+  def __init__(self, v, nl):
     Componente.__init__(self)
     self.valor= v
     self.linea=nl
@@ -79,7 +99,7 @@ class PR(Componente):
 # Clase que define la categoria OpRel
 # Debe alnmacenarse que operador es concretamente
 class OpRel(Componente):
-  def __init__(self,v,nl, op):
+  def __init__(self, nl, op):
     Componente.__init__(self)
     self.linea = nl
     self.operador = op
